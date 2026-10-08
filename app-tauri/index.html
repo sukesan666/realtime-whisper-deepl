@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Realtime Whisper</title>
+    <!-- NOTE: 現状は Google Fonts 参照。オフライン配布時はフォントを同梱する（MIGRATION_PLAN §4 参照） -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/src/styles.css" />
+    <script type="module" src="/src/main.ts" defer></script>
+  </head>
+
+  <body>
+    <div class="tw-window">
+      <!-- Title bar -->
+      <div class="titlebar" data-tauri-drag-region>
+        <div class="titlebar-left" data-tauri-drag-region>
+          <div class="app-icon">🎙</div>
+          <span class="app-name">Realtime Whisper</span>
+        </div>
+        <div class="titlebar-controls">
+          <button class="win-btn" id="btn-min" title="最小化">&#8212;</button>
+          <button class="win-btn" id="btn-max" title="最大化">&#9633;</button>
+          <button class="win-btn win-btn-close" id="btn-close" title="閉じる">&#10005;</button>
+        </div>
+      </div>
+
+      <!-- Toolbar -->
+      <div class="toolbar">
+        <button class="start-btn" id="btn-start">
+          <span class="start-dot"></span>
+          <span class="start-label">Start</span>
+        </button>
+        <div class="toolbar-divider"></div>
+        <button class="toggle-btn" id="btn-translation">翻訳 <span class="state">OFF</span></button>
+        <button class="toggle-btn" id="btn-topmost">オーバーレイ字幕 <span class="state">OFF</span></button>
+        <button class="toggle-btn ghost" id="btn-advanced">詳細設定 <span class="arrow">&#9660;</span></button>
+        <div class="toolbar-spacer"></div>
+        <span class="mono caption" id="chunk-caption">chunk 4.0s · overlap 1.5s</span>
+      </div>
+
+      <!-- Advanced settings -->
+      <div class="advanced-panel" id="advanced-panel" hidden>
+        <div class="field">
+          <span class="field-label">入力デバイス</span>
+          <select class="field-input" id="fld-device"></select>
+        </div>
+        <div class="field">
+          <span class="field-label">モデル</span>
+          <select class="field-input" id="fld-model"></select>
+        </div>
+        <div class="field">
+          <span class="field-label">デバイスモード</span>
+          <select class="field-input" id="fld-device-mode"></select>
+        </div>
+        <div class="field">
+          <span class="field-label">Whisper backend</span>
+          <select class="field-input" id="fld-backend"></select>
+        </div>
+        <div class="field">
+          <span class="field-label">Compute type</span>
+          <select class="field-input" id="fld-compute"></select>
+        </div>
+        <div class="field span2">
+          <span class="field-label"
+            >whisper.cpp exe <em class="hint">(blank = auto detect)</em></span
+          >
+          <input class="field-input mono path" id="fld-exe" type="text" spellcheck="false" />
+        </div>
+        <div class="field span2">
+          <span class="field-label"
+            >whisper.cpp model <em class="hint">(blank = auto from model)</em></span
+          >
+          <input class="field-input mono path" id="fld-model-path" type="text" spellcheck="false" />
+        </div>
+        <div class="field">
+          <span class="field-label">Chunk seconds</span>
+          <input class="field-input" id="fld-chunk" type="number" step="0.5" min="0" />
+        </div>
+        <div class="field">
+          <span class="field-label">Overlap seconds</span>
+          <input class="field-input" id="fld-overlap" type="number" step="0.5" min="0" />
+        </div>
+        <div class="action-row span2">
+          <button class="action-btn" id="btn-prepare-whisper">Prepare Whisper</button>
+          <button class="action-btn" id="btn-reload-devices">Reload デバイス一覧</button>
+          <button class="action-btn" id="btn-prepare-argos">Check DeepL en→ja</button>
+        </div>
+      </div>
+
+      <!-- Subtitle display -->
+      <div class="subtitle-area">
+        <div class="subtitle-card">
+          <div class="sub-block">
+            <span class="sub-label">English</span>
+            <div class="sub-en" id="text-en"></div>
+          </div>
+          <div class="sub-divider"></div>
+          <div class="sub-block">
+            <span class="sub-label">日本語</span>
+            <div class="sub-ja" id="text-ja"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Log -->
+      <div class="log-section">
+        <button class="log-header" id="btn-log">
+          <span class="log-title"><span class="log-dot"></span>Log</span>
+          <span class="arrow" id="log-arrow">&#9660;</span>
+        </button>
+        <div class="log-body mono" id="log-body" hidden></div>
+      </div>
+    </div>
+  </body>
+</html>

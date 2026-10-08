@@ -1,0 +1,436 @@
+/*
+ * Realtime Whisper — Modern UI
+ * Design tokens sourced from design_handoff_realtime_whisper/README.md (oklch, L C H).
+ */
+
+:root {
+  --bg-window: oklch(0.17 0.012 260);
+  --bg-titlebar: oklch(0.14 0.012 260);
+  --bg-panel: oklch(0.15 0.012 260);
+  --bg-field: oklch(0.13 0.012 260);
+  --bg-log: oklch(0.12 0.012 260);
+
+  --border-1: oklch(0.26 0.012 260);
+  --border-2: oklch(0.28 0.012 260);
+  --border-3: oklch(0.32 0.012 260);
+
+  --text-hi: oklch(0.95 0.005 260);
+  --text-hi2: oklch(0.9 0.005 260);
+  --text-mid: oklch(0.85 0.005 260);
+  --text-dim: oklch(0.55 0.01 260);
+  --text-dim2: oklch(0.65 0.01 260);
+  --text-faint: oklch(0.45 0.01 260);
+
+  --accent-blue: oklch(0.6 0.15 250);
+  --accent-blue-icon: oklch(0.68 0.14 250);
+  --accent-blue-active: oklch(0.3 0.1 250);
+  --danger-red: oklch(0.55 0.16 25);
+  --danger-red-hover: oklch(0.55 0.18 25);
+  --green: oklch(0.7 0.15 150);
+
+  --font-ui: "Inter", system-ui, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-ui);
+  color: var(--text-hi);
+  background: var(--bg-window);
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+  user-select: none;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: oklch(0.4 0.01 260);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+.tw-window {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: var(--bg-window);
+}
+
+/* ---------- Title bar ---------- */
+.titlebar {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 44px;
+  padding: 0 8px 0 16px;
+  background: var(--bg-titlebar);
+  border-bottom: 1px solid var(--border-1);
+}
+
+.titlebar-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.app-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  background: var(--accent-blue-icon);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
+
+.app-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-hi2);
+  letter-spacing: 0.2px;
+}
+
+.titlebar-controls {
+  display: flex;
+}
+
+.win-btn {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  color: oklch(0.7 0.01 260);
+  font-size: 13px;
+  cursor: pointer;
+  font-family: var(--font-ui);
+}
+.win-btn:hover {
+  background: oklch(0.22 0.012 260);
+}
+.win-btn-close:hover {
+  background: var(--danger-red-hover);
+  color: white;
+}
+
+/* ---------- Toolbar ---------- */
+.toolbar {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border-1);
+  flex-wrap: wrap;
+}
+
+.start-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 18px;
+  border-radius: 8px;
+  border: none;
+  background: var(--accent-blue);
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font-ui);
+}
+.start-btn:hover {
+  filter: brightness(1.06);
+}
+.start-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: oklch(0.9 0.05 250);
+}
+.tw-window.running .start-btn {
+  background: var(--danger-red);
+}
+.tw-window.running .start-dot {
+  background: oklch(0.9 0.05 25);
+}
+
+.toolbar-divider {
+  width: 1px;
+  height: 22px;
+  background: var(--border-2);
+  margin: 0 4px;
+}
+
+.toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border-3);
+  background: transparent;
+  color: oklch(0.92 0.005 260);
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: var(--font-ui);
+}
+.toggle-btn:hover {
+  background: oklch(0.22 0.012 260);
+}
+.toggle-btn.active {
+  background: var(--accent-blue-active);
+}
+.toggle-btn.active:hover {
+  background: oklch(0.34 0.1 250);
+}
+.toggle-btn.ghost {
+  gap: 6px;
+  color: oklch(0.8 0.005 260);
+}
+
+.toolbar-spacer {
+  flex: 1;
+}
+
+.caption {
+  font-size: 11.5px;
+  color: var(--text-dim);
+}
+
+/* ---------- Advanced panel ---------- */
+.advanced-panel {
+  flex: 0 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 24px;
+  padding: 16px 20px;
+  background: var(--bg-panel);
+  border-bottom: 1px solid var(--border-1);
+  font-size: 12px;
+}
+.advanced-panel[hidden] {
+  display: none;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.field.span2 {
+  grid-column: span 2;
+}
+
+.field-label {
+  color: var(--text-dim);
+}
+.field-label .hint {
+  color: var(--text-faint);
+  font-style: normal;
+}
+
+.field-input {
+  padding: 7px 10px;
+  border-radius: 6px;
+  background: var(--bg-field);
+  border: 1px solid var(--border-2);
+  color: var(--text-mid);
+  font-family: var(--font-ui);
+  font-size: 12px;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.field-input:focus {
+  outline: none;
+  border-color: var(--accent-blue);
+}
+.field-input.path {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: oklch(0.8 0.005 260);
+}
+select.field-input {
+  appearance: none;
+  cursor: pointer;
+}
+
+.action-row {
+  display: flex;
+  gap: 10px;
+  padding-top: 4px;
+}
+
+.action-btn {
+  padding: 7px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--border-3);
+  background: transparent;
+  color: var(--text-mid);
+  font-size: 11.5px;
+  cursor: pointer;
+  font-family: var(--font-ui);
+}
+.action-btn:hover {
+  background: oklch(0.2 0.012 260);
+}
+
+/* ---------- Subtitle display ---------- */
+.subtitle-area {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  padding: 0 16px 12px;
+  background: var(--bg-window);
+}
+
+.subtitle-card {
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  background: oklch(0 0 0);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid oklch(0.24 0.01 260);
+}
+
+/* English (top) と 日本語 (bottom) を上下 50/50 に分割して枠いっぱいに広げる */
+.sub-block {
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 24px 32px;
+}
+
+/* 最新の文字起こし／翻訳を左下に寄せる（テキストは下端揃え、あふれたら最新が見える） */
+.sub-en,
+.sub-ja {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  text-align: left;
+}
+
+.sub-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+
+.sub-en {
+  margin: 0;
+  font-size: 21px;
+  line-height: 1.5;
+  color: oklch(0.75 0.005 260);
+  font-weight: 400;
+}
+
+.sub-divider {
+  height: 1px;
+  background: oklch(0.22 0 0);
+}
+
+.sub-ja {
+  margin: 0;
+  font-size: 30px;
+  line-height: 1.5;
+  color: white;
+  font-weight: 600;
+}
+
+/* 履歴の各行。最新（末尾）ほど下に積み上がる。 */
+.sub-line {
+  margin: 0;
+}
+.sub-line + .sub-line {
+  margin-top: 6px;
+}
+/* 直近の行を強調し、過去の行は少し沈ませる */
+.sub-en .sub-line:not(:last-child) {
+  color: oklch(0.6 0.005 260);
+}
+.sub-ja .sub-line:not(:last-child) {
+  color: oklch(0.82 0.005 260);
+  font-weight: 500;
+}
+
+/* ---------- Log ---------- */
+.log-section {
+  flex: 0 0 auto;
+  border-top: 1px solid var(--border-1);
+}
+
+.log-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background: var(--bg-titlebar);
+  border: none;
+  color: var(--text-dim2);
+  font-size: 12px;
+  cursor: pointer;
+  font-family: var(--font-ui);
+}
+
+.log-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.log-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+}
+
+.log-body {
+  height: 150px;
+  overflow-y: auto;
+  background: var(--bg-log);
+  padding: 12px 20px;
+  font-size: 11px;
+  line-height: 1.7;
+  color: var(--text-dim);
+  white-space: pre-wrap;
+  user-select: text;
+}
+.log-body[hidden] {
+  display: none;
+}

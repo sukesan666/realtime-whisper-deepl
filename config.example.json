@@ -1,0 +1,21 @@
+{
+  "whisper_backend": "whisper.cpp",
+  "selected_device_index": null,
+  "model_name": "small.en",
+  "whisper_cpp_executable": "",
+  "whisper_cpp_model_path": "",
+  "device_mode": "auto",
+  "compute_type": "auto",
+  "chunk_seconds": 4.0,
+  "overlap_seconds": 1.5,
+  "translation_enabled": false,
+  "overlay_enabled": false,
+  "overlay_position": [
+    80,
+    80
+  ],
+  "overlay_size": [
+    420,
+    180
+  ]
+}

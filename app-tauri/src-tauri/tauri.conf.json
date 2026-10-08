@@ -1,0 +1,59 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "app-tauri",
+  "version": "0.1.0",
+  "identifier": "com.realtimewhisper.app",
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "devUrl": "http://localhost:1420",
+    "beforeBuildCommand": "npm run build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "withGlobalTauri": true,
+    "windows": [
+      {
+        "label": "main",
+        "title": "Realtime Whisper",
+        "width": 980,
+        "height": 760,
+        "minWidth": 900,
+        "minHeight": 680,
+        "decorations": false,
+        "resizable": true
+      },
+      {
+        "label": "overlay",
+        "url": "overlay.html",
+        "title": "Realtime Whisper Overlay",
+        "width": 720,
+        "height": 180,
+        "minWidth": 280,
+        "minHeight": 100,
+        "x": 80,
+        "y": 80,
+        "decorations": false,
+        "transparent": true,
+        "alwaysOnTop": true,
+        "skipTaskbar": true,
+        "shadow": false,
+        "resizable": true,
+        "visible": false
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ]
+  }
+}
