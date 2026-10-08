@@ -1,0 +1,2 @@
+# realtime-whisper-deepl
+Windowsの再生音声をWhisperで文字起こしし、DeepLで日本語字幕を表示するRealtime Whisper改造版。
